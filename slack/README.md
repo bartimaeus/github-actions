@@ -41,7 +41,7 @@ errorNotification() {
 trap "errorNotification" ERR SIGINT SIGTERM
 ## END github-actions/slack ##
 
-# entrypoint deployment custom script...
+# entrypoint custom script...
 ```
 
 See the notification in Slack
