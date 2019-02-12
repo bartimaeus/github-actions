@@ -7,7 +7,7 @@ errorNotification() {
   [ $? -eq 0 ] && exit
 
   # Install bartimaeus/github-actions/slack remotely
-  # bash -c "$(curl -fsSL https://bartimae.us/github-actions/slack/setup.sh)"
+  # sh -c "$(curl -fsSL https://bartimae.us/github-actions/slack/setup.sh)"
   # slack-notify "$SLACK_MESSAGE" "$SLACK_COLOR"
 
   # Use local slack-notify

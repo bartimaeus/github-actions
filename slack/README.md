@@ -4,7 +4,9 @@ This is a simple bash script that sends a formatted message using a GitHub Actio
 
 ## Install
 
-    $ bash -c "$(curl -fsSL https://bartimae.us/github-actions/slack/setup.sh)"
+```bash
+sh -c "$(curl -fsSL https://bartimae.us/github-actions/slack/setup.sh)"
+```
 
 ## Usage
 
@@ -34,7 +36,7 @@ errorNotification() {
   [ $? -eq 0 ] && exit
 
   # Install github-actions/slack
-  bash -c "$(curl -fsSL https://bartimae.us/github-actions/slack/setup.sh)"
+  sh -c "$(curl -fsSL https://bartimae.us/github-actions/slack/setup.sh)"
 
   # Send Slack notification
   slack-notify "$SLACK_MESSAGE" "$SLACK_COLOR"
