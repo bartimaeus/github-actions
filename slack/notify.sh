@@ -1,20 +1,20 @@
-#!/bin/bash
+#!/bin/sh
 
 # Usage: slack-notify "<pretext>" "<color>"
 
 set -e
 
-if [[ -z "$GITHUB_EVENT_PATH" ]]; then
+if [ -z "$GITHUB_EVENT_PATH" ]; then
     echo "Set the GITHUB_EVENT_PATH env variable."
     exit 1
 fi
 
-if [[ -z "$SLACK_WEBHOOK_URL" ]]; then
+if [ -z "$SLACK_WEBHOOK_URL" ]; then
     echo "Set the SLACK_WEBHOOK_URL env variable."
     exit 1
 fi
 
-if [[ -z "$1" ]]; then
+if [ -z "$1" ]; then
     cat << EOF
 Missing pretext!
 ~> usage: slack-notify pretext [color]
@@ -39,7 +39,7 @@ repository_name=$(jq --raw-output .repository.name "$GITHUB_EVENT_PATH")
 repository_icon=$(jq --raw-output .repository.owner.avatar_url "$GITHUB_EVENT_PATH")
 repository_url=$(jq --raw-output .repository.html_url "$GITHUB_EVENT_PATH")
 ref=$(jq --raw-output .ref "$GITHUB_EVENT_PATH")
-branch=$(echo ${ref//refs\/heads\//})
+branch=$(echo $ref | sed -e "s/refs\/heads\///g")
 branch_url=$(echo "${repository_url}/tree/${branch}")
 
 payload() {

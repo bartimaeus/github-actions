@@ -16,7 +16,7 @@ action "Deploy" {
   secrets = [ "SLACK_WEBHOOK_URL" ]
   env = {
     "SLACK_MESSAGE": ":fire: *Failure*"
-    "SLACK_COLOR": "#ff5b5b" # Optional, will default to #666666
+    "SLACK_COLOR": "#ff5b5b" # Optional, will default to #cccccc
   }
 }
 ```
@@ -24,21 +24,21 @@ action "Deploy" {
 Next, include **github-actions/slack** in your custom GitHub Action `entrypoint.sh`:
 
 ```bash
-#!/bin/bash
+#!/bin/sh
 
 set -e
 
 ## BEGIN github-actions/slack ##
+trap "errorNotification" EXIT
 errorNotification() {
-  # Install github-actions-slack
+  [ $? -eq 0 ] && exit
+
+  # Install github-actions/slack
   bash -c "$(curl -fsSL https://bartimae.us/github-actions/slack/setup.sh)"
 
   # Send Slack notification
   slack-notify "$SLACK_MESSAGE" "$SLACK_COLOR"
 }
-
-# Run errorNotification on any ERR, SIGINT, or SIGTERM
-trap "errorNotification" ERR SIGINT SIGTERM
 ## END github-actions/slack ##
 
 # entrypoint custom script...
@@ -46,4 +46,4 @@ trap "errorNotification" ERR SIGINT SIGTERM
 
 See the notification in Slack
 
-![Slack Notification](https://s3.amazonaws.com/github-actions-slack/github-actions-slack-notification.png?v3)
+![Slack Notification](https://s3.amazonaws.com/github-actions-slack/github-actions-slack-notification.png)

@@ -1,5 +1,5 @@
-#!/bin/bash
+#!/bin/sh
 
 set -e
 
-bash -c "slack-notify $SLACK_MESSAGE $SLACK_COLOR"
+sh -c "slack-notify $SLACK_MESSAGE $SLACK_COLOR"

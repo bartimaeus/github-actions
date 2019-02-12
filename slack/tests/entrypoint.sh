@@ -1,8 +1,11 @@
-#!/bin/bash
+#!/bin/sh
 
 set -e
 
+trap "errorNotification" EXIT
 errorNotification() {
+  [ $? -eq 0 ] && exit
+
   # Install bartimaeus/github-actions/slack remotely
   # bash -c "$(curl -fsSL https://bartimae.us/github-actions/slack/setup.sh)"
   # slack-notify "$SLACK_MESSAGE" "$SLACK_COLOR"
@@ -11,7 +14,6 @@ errorNotification() {
   echo "$(which slack-notify)"
   slack-notify "$SLACK_MESSAGE" "$SLACK_COLOR"
 }
-trap "errorNotification" ERR SIGINT SIGTERM
 
 bogus_deployment_function
 

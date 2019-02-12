@@ -13,7 +13,7 @@ action "build" {
   ]
   env = {
     "SLACK_MESSAGE": ":boom: *Failed* to build"
-    "SLACK_COLOR": "#ff5b5b" # Optional, will default to #666666
+    "SLACK_COLOR": "#ff5b5b" # Optional, will default to #cccccc
   }
 }
 ```
