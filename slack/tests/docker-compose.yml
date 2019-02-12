@@ -1,0 +1,12 @@
+version: "3.2"
+
+services:
+  github-actions-slack:
+    build:
+      context: ../
+      dockerfile: ./tests/Dockerfile
+    environment:
+      - GITHUB_EVENT_PATH=/event.json
+      - "SLACK_MESSAGE=:fire: **Failure**"
+      - SLACK_COLOR=#ff5b5b
+      - SLACK_WEBHOOK_URL=[REPLACE_WITH_VALID_WEBHOOK_URL]
