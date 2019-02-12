@@ -9,7 +9,7 @@ LABEL "com.github.actions.description"="Wraps the Docker CLI to enable Docker co
 LABEL "com.github.actions.icon"="package"
 LABEL "com.github.actions.color"="blue"
 
-RUN apt-get update && apt-get install -y curl jq
+RUN apk add --no-cache curl jq
 
 COPY entrypoint.sh /entrypoint.sh
 
