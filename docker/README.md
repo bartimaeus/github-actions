@@ -7,14 +7,12 @@ The GitHub Action for [Docker](https://docker.com/) wraps the Docker CLI to enab
 ```bash
 action "build" {
   uses = "bartimaeus/github-actions/docker@master"
-  args = "build -t user/repo ."
-  secrets = [
-    "SLACK_WEBHOOK_URL"
-  ]
+  secrets = ["SLACK_WEBHOOK_URL"]
   env = {
-    "SLACK_MESSAGE": ":boom: *Failed* to build"
-    "SLACK_COLOR": "#ff5b5b" # Optional, will default to #cccccc
+    SLACK_MESSAGE = ":boom: *Failed* to build"
+    SLACK_COLOR = "#ff5b5b" # Optional, will default to #cccccc
   }
+  args = "build -t user/repo ."
 }
 ```
 

@@ -17,8 +17,8 @@ action "Deploy" {
   uses = "username/actions/custom@master"
   secrets = [ "SLACK_WEBHOOK_URL" ]
   env = {
-    "SLACK_MESSAGE": ":fire: *Failure*"
-    "SLACK_COLOR": "#ff5b5b" # Optional, will default to #cccccc
+    SLACK_MESSAGE = ":fire: *Failure*"
+    SLACK_COLOR = "#ff5b5b" # Optional, will default to #cccccc
   }
 }
 ```
