@@ -7,7 +7,7 @@ LABEL "version"="1.0.0"
 LABEL "com.github.actions.name"="GitHub Action for ECS"
 LABEL "com.github.actions.description"="Wraps the AWS CLI for blue/greem deploys. Errors sent to Slack."
 LABEL "com.github.actions.icon"="layers"
-LABEL "com.github.actions.color"="yellow"
+LABEL "com.github.actions.color"="orange"
 
 RUN apt-get update && \
   apt-get install -y curl jq && \
