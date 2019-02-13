@@ -9,4 +9,6 @@ services:
       - GITHUB_EVENT_PATH=/event.json
       - "SLACK_MESSAGE=:fire: *Failure*"
       - SLACK_COLOR=#ff5b5b
-      - SLACK_WEBHOOK_URL=[REPLACE_WITH_VALID_WEBHOOK_URL]
+      # - SLACK_WEBHOOK_URL=[REPLACE_WITH_VALID_WEBHOOK_URL]
+      - SLACK_WEBHOOK_URL=https://hooks.slack.com/services/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
+x
