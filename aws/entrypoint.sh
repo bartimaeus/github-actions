@@ -15,13 +15,17 @@ errorNotification() {
   slack-notify "$SLACK_MESSAGE", "$SLACK_COLOR"
 }
 
-# If PROD_ environment variables provided, create aws config file
+# If PROD_ environment variables provided, create aws credentials file
 if [ -n "${PROD_AWS_ACCESS_KEY_ID}" ] && [ -n "${PROD_AWS_SECRET_ACCESS_KEY}" ]; then
-    mkdir -p $GITHUB_WORKSPACE/.aws
-    touch $GITHUB_WORKSPACE/.aws/config
-    echo "[default]" >> $GITHUB_WORKSPACE/.aws/config
-    echo "access_key_id=$PROD_AWS_ACCESS_KEY_ID" >> $GITHUB_WORKSPACE/.aws/config
-    echo "aws_secret_access_key=$PROD_AWS_SECRET_ACCESS_KEY" >> $GITHUB_WORKSPACE/.aws/config
+    mkdir -p $HOME/.aws
+
+    # Create AWS credentials file
+    if [ ! -f "$HOME/.aws/credentials" ]; then
+      touch $HOME/.aws/credentials
+      echo "[default]" >> $HOME/.aws/credentials
+      echo "aws_access_key_id=$PROD_AWS_ACCESS_KEY_ID" >> $HOME/.aws/credentials
+      echo "aws_secret_access_key=$PROD_AWS_SECRET_ACCESS_KEY" >> $HOME/.aws/credentials
+    fi
 fi
 
 # Respect AWS_DEFAULT_REGION if specified
