@@ -11,7 +11,7 @@ LABEL "com.github.actions.color"="purple"
 
 RUN apt-get update && \
   apt-get install -y curl jq && \
-  pip install aws-cli
+  pip install awscli
 
 COPY entrypoint.sh /entrypoint.sh
 
