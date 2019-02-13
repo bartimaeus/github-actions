@@ -16,8 +16,9 @@ errorNotification() {
 }
 
 # Download the latest version of ecs-deploy
-curl -o /usr/local/bin/ecs-deploy "https://raw.githubusercontent.com/silinternational/ecs-deploy/develop/ecs-deploy"
+curl -o /usr/local/bin/ecs-deploy https://raw.githubusercontent.com/silinternational/ecs-deploy/develop/ecs-deploy
 chmod +x /usr/local/bin/ecs-deploy
+echo "Successfully downloaded ecs-deploy"
 
 # If PROD_ environment variables provided, create aws config file
 if [ -n "${PROD_AWS_ACCESS_KEY_ID+0}" ] && [ -n "${PROD_AWS_SECRET_ACCESS_KEY+0}" ]; then
@@ -28,4 +29,5 @@ if [ -n "${PROD_AWS_ACCESS_KEY_ID+0}" ] && [ -n "${PROD_AWS_SECRET_ACCESS_KEY+0}
     echo "aws_secret_access_key=$PROD_AWS_SECRET_ACCESS_KEY" >> $GITHUB_WORKSPACE/.aws/config
 fi
 
+echo "Executing ecs-deploy..."
 sh -c "ecs-deploy $*"
