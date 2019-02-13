@@ -11,9 +11,13 @@ errorNotification() {
   slack-notify "$SLACK_MESSAGE", "$SLACK_COLOR"
 }
 
-# Replace PROD_ environment variables
-if [[ -n "$PROD_AWS_ACCESS_KEY_ID" && -n "$PROD_AWS_SECRET_ACCESS_KEY" ]]; then
-  sh -c "AWS_ACCESS_KEY_ID=$PROD_AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$PROD_AWS_SECRET_ACCESS_KEY aws $*"
-else
-  sh -c "aws $*"
+# If PROD_ environment variables provided, create aws config file
+if [ -n "${PROD_AWS_ACCESS_KEY_ID+0}" ] && [ -n "${PROD_AWS_SECRET_ACCESS_KEY+0}" ]; then
+    mkdir -p $GITHUB_WORKSPACE/.aws
+    touch $GITHUB_WORKSPACE/.aws/config
+    echo "[default]" >> $GITHUB_WORKSPACE/.aws/config
+    echo "access_key_id=$PROD_AWS_ACCESS_KEY_ID" >> $GITHUB_WORKSPACE/.aws/config
+    echo "aws_secret_access_key=$PROD_AWS_SECRET_ACCESS_KEY" >> $GITHUB_WORKSPACE/.aws/config
 fi
+
+sh -c "aws $*"

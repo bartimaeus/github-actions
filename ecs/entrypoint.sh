@@ -15,15 +15,13 @@ errorNotification() {
 curl -o /usr/local/bin/ecs-deploy "https://raw.githubusercontent.com/silinternational/ecs-deploy/develop/ecs-deploy"
 chmod +x /usr/local/bin/ecs-deploy
 
-# Replace PROD_ environment variables
-if [ -n "$PROD_AWS_ACCESS_KEY_ID"]; then
-  AWS_ACCESS_KEY_ID=$PROD_AWS_ACCESS_KEY_ID
-fi
-if [ -n "$PROD_AWS_ACCOUNT_ID"]; then
-  AWS_ACCOUNT_ID=$PROD_AWS_ACCOUNT_ID
-fi
-if [ -n "$PROD_AWS_SECRET_ACCESS_KEY"]; then
-  AWS_SECRET_ACCESS_KEY=$PROD_AWS_SECRET_ACCESS_KEY
+# If PROD_ environment variables provided, create aws config file
+if [ -n "${PROD_AWS_ACCESS_KEY_ID+0}" ] && [ -n "${PROD_AWS_SECRET_ACCESS_KEY+0}" ]; then
+    mkdir -p $GITHUB_WORKSPACE/.aws
+    touch $GITHUB_WORKSPACE/.aws/config
+    echo "[default]" >> $GITHUB_WORKSPACE/.aws/config
+    echo "access_key_id=$PROD_AWS_ACCESS_KEY_ID" >> $GITHUB_WORKSPACE/.aws/config
+    echo "aws_secret_access_key=$PROD_AWS_SECRET_ACCESS_KEY" >> $GITHUB_WORKSPACE/.aws/config
 fi
 
 sh -c "ecs-deploy $*"
