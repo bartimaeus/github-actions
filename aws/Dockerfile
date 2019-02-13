@@ -10,7 +10,7 @@ LABEL com.github.actions.name="GitHub Action for AWS"
 LABEL com.github.actions.description="Wraps the aws CLI to enable common AWS commands."
 LABEL com.github.actions.icon="box"
 LABEL com.github.actions.color="yellow"
-COPY LICENSE README.md THIRD_PARTY_NOTICE.md /
+COPY LICENSE README.md /
 
 ENV DOCKERVERSION=18.06.1-ce
 RUN apt-get update && \
