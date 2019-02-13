@@ -12,7 +12,7 @@ errorNotification() {
 }
 
 # Download the latest version of ecs-deploy
-curl -o- /usr/local/bin/ecs-deploy "https://raw.githubusercontent.com/silinternational/ecs-deploy/develop/ecs-deploy"
+curl -o /usr/local/bin/ecs-deploy "https://raw.githubusercontent.com/silinternational/ecs-deploy/develop/ecs-deploy"
 chmod +x /usr/local/bin/ecs-deploy
 
 # Replace PROD_ environment variables
