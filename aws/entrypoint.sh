@@ -12,14 +12,8 @@ errorNotification() {
 }
 
 # Replace PROD_ environment variables
-if [ -n "$PROD_AWS_ACCESS_KEY_ID"]; then
-  export AWS_ACCESS_KEY_ID=$PROD_AWS_ACCESS_KEY_ID
+if [[ -n "$PROD_AWS_ACCESS_KEY_ID" && -n "$PROD_AWS_SECRET_ACCESS_KEY" ]]; then
+  sh -c "AWS_ACCESS_KEY_ID=$PROD_AWS_ACCESS_KEY_ID AWS_SECRET_ACCESS_KEY=$PROD_AWS_SECRET_ACCESS_KEY aws $*"
+else
+  sh -c "aws $*"
 fi
-if [ -n "$PROD_AWS_ACCOUNT_ID"]; then
-  export AWS_ACCOUNT_ID=$PROD_AWS_ACCOUNT_ID
-fi
-if [ -n "$PROD_AWS_SECRET_ACCESS_KEY"]; then
-  export AWS_SECRET_ACCESS_KEY=$PROD_AWS_SECRET_ACCESS_KEY
-fi
-
-sh -c "aws $*"
