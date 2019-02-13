@@ -15,4 +15,15 @@ errorNotification() {
 curl -o- /usr/local/bin/ecs-deploy "https://raw.githubusercontent.com/silinternational/ecs-deploy/develop/ecs-deploy"
 chmod +x /usr/local/bin/ecs-deploy
 
+# Replace PROD_ environment variables
+if [ -n "$PROD_AWS_ACCESS_KEY_ID"]; then
+  AWS_ACCESS_KEY_ID=$PROD_AWS_ACCESS_KEY_ID
+fi
+if [ -n "$PROD_AWS_ACCOUNT_ID"]; then
+  AWS_ACCOUNT_ID=$PROD_AWS_ACCOUNT_ID
+fi
+if [ -n "$PROD_AWS_SECRET_ACCESS_KEY"]; then
+  AWS_SECRET_ACCESS_KEY=$PROD_AWS_SECRET_ACCESS_KEY
+fi
+
 sh -c "ecs-deploy $*"
