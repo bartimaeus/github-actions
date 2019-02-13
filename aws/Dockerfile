@@ -9,7 +9,9 @@ LABEL "com.github.actions.description"="Wraps the AWS CLI allowing for differnt 
 LABEL "com.github.actions.icon"="package"
 LABEL "com.github.actions.color"="yellow"
 
-RUN pip install awscli
+RUN apt update && \
+  apt install -y curl && \
+  pip install awscli
 
 COPY entrypoint.sh /entrypoint.sh
 
