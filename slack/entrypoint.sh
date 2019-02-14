@@ -2,4 +2,6 @@
 
 set -e
 
-sh -c "slack-notify $SLACK_MESSAGE $SLACK_COLOR"
+slack-notify "$SLACK_MESSAGE" "$SLACK_COLOR"
+
+echo "Notification successfully sent to slack."
