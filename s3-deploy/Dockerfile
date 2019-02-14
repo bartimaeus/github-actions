@@ -9,8 +9,8 @@ LABEL "com.github.actions.description"="Deploys JavaScript application to S3 and
 LABEL "com.github.actions.icon"="cloud"
 LABEL "com.github.actions.color"="yellow"
 
-RUN apt-update && \
-  apt-install -y curl jq && \
+RUN apt-get update && \
+  apt-get install -y curl jq && \
   pip install awscli
 
 COPY entrypoint.sh /entrypoint.sh
